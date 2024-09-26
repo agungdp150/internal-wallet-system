@@ -1,0 +1,16 @@
+default: &default
+  adapter: postgis
+  encoding: unicode
+  urt: <%= ENV.fetch('DATABASE_URL').sub(/^postgres/, 'postgis') %>
+
+development:
+  <<: *default
+  database: wallet_dev
+
+test:
+  <<: *default
+  database: wallet_test
+
+production:
+  <<: *default
+  urt: <%= ENV.fetch('DATABASE_URL').sub(/^postgres/, 'postgis') %>
